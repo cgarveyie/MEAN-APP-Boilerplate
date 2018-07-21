@@ -1,0 +1,25 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "movies app",
+  "main": "server.js",
+  "scripts": {
+    "test": "start"
+  },
+  "keywords": [
+    "movies"
+  ],
+  "author": "Daniel Mezhibovsky",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^2.2.16",
+    "mongoose": "^5.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.1"
+  }
+}
