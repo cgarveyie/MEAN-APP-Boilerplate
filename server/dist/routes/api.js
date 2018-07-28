@@ -1,15 +1,25 @@
+'use strict';
+
+var _MongoDB = require('../config/database/MongoDB');
+
+var _MongoDB2 = _interopRequireDefault(_MongoDB);
+
+var _UserController = require('../controllers/UserController');
+
+var _UserController2 = _interopRequireDefault(_UserController);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // --------------------------------------------------
 //  Routes
 // --------------------------------------------------
-const express = require('express');
-const moogoose = require('mongoose');
-const db = require('../config/database');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
+var express = require('express');
+var moogoose = require('mongoose');
+var db = require('../config/database');
+var router = express.Router();
+var jwt = require('jsonwebtoken');
 
-import MongoDB from '../config/database/MongoDB';
-import UserController from '../controllers/UserController'
-const UserCtrl = new UserController();
+var UserCtrl = new _UserController2.default();
 
 //Connect to db
 // moogoose.connect(db.url, err => {
@@ -25,11 +35,11 @@ function verifyToken(req, res, next) {
     if (!req.headers.authorization) {
         res.status(401).send('Unauthorized request');
     }
-    let token = req.headers.authorization.split(' ')[1];
+    var token = req.headers.authorization.split(' ')[1];
     if (token === 'null') {
         res.status(401).send('Unauthorized request');
     }
-    let payload = jwt.verify(token, '_secret');
+    var payload = jwt.verify(token, '_secret');
     if (!payload) {
         res.status(401).send('Unauthorized request');
     }
@@ -53,7 +63,7 @@ router.post('/login', UserCtrl.login);
 // --------------------------------------
 
 //index.html => Angular SPA
-router.get('*', (req, res) => {
+router.get('*', function (req, res) {
     res.send('Hello World!');
 });
 
