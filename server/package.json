@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node bin/dev",
         "clean": "RD /S /Q dist",
-        "build": "npm run clean && mkdir dist && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+        "build": "npm run clean && mkdir dist && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files && npm start"
     },
     "keywords": [
         "angular",

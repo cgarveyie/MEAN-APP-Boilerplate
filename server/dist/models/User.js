@@ -46,7 +46,7 @@ var User = function () {
         key: 'getSchema',
         value: function getSchema() {
             if (!this.schema) {
-                this.schema = new Schema({
+                var userSchema = new Schema({
                     email: {
                         type: String,
                         required: true
@@ -56,9 +56,13 @@ var User = function () {
                         required: true
                     }
                 });
-            }
 
-            this.schema = mongoose.model('_user', this.schema, 'users');
+                if (mongoose.models && mongoose.models.User) {
+                    this.schema = mongoose.models.User;
+                } else {
+                    this.schema = mongoose.model('User', userSchema);
+                }
+            }
 
             return this.schema;
         }
