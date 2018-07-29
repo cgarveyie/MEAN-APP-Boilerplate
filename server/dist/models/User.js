@@ -1,3 +1,5 @@
+'use strict';
+
 // --------------------------------------------------
 //  User Model
 // --------------------------------------------------
@@ -17,4 +19,4 @@ var userSchema = new Schema({
 });
 
 //Make Available For Node
-module.exports = (mongoose.models && mongoose.models.User) ? mongoose.models.User : mongoose.model('User', userSchema, 'users');
+module.exports = mongoose.models && mongoose.models.User ? mongoose.models.User : mongoose.model('User', userSchema, 'users');
