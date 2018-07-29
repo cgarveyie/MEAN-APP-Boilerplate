@@ -11,7 +11,7 @@ export default class MongoDB {
 
         //Connect to db
         let url = `mongodb+srv://${this.user}:${this.password}@${this.host}`;
-        moogoose.connect(url, err => {
+        moogoose.connect(url, { useNewUrlParser: true }, err => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
