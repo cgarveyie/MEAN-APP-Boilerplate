@@ -26,7 +26,7 @@ var MongoDB = function () {
 
         //Connect to db
         var url = 'mongodb+srv://' + this.user + ':' + this.password + '@' + this.host;
-        moogoose.connect(url, function (err) {
+        moogoose.connect(url, { useNewUrlParser: true }, function (err) {
             if (err) {
                 console.log('Error: ' + err);
             } else {
