@@ -1,9 +1,5 @@
 node_modules
 server/config/database.js
-<<<<<<< HEAD
-server/config/database/MongoDB.js
-npm-debug.log
-=======
 
 # compiled output
 /dist
@@ -47,4 +43,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
->>>>>>> dev
