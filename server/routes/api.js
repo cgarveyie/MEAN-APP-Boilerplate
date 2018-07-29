@@ -1,24 +1,17 @@
 // --------------------------------------------------
 //  Routes
 // --------------------------------------------------
-const express = require('express');
-const moogoose = require('mongoose');
-const db = require('../config/database');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
-
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import express from 'express';
 import MongoDB from '../config/database/MongoDB';
 import UserController from '../controllers/UserController'
-const UserCtrl = new UserController();
+import DashboardController from '../controllers/DashboardController';
 
-//Connect to db
-// moogoose.connect(db.url, err => {
-//     if (err) {
-//         console.log('Error: ' + err);
-//     } else {
-//         console.log('Connected to MongoDB');
-//     }
-// });
+const DB = new MongoDB();
+const router = express.Router();
+const UserCtrl = new UserController();
+const DashboardCtrl = new DashboardController();
 
 //Verify token
 function verifyToken(req, res, next) {
@@ -46,7 +39,7 @@ router.post('/register', UserCtrl.register);
 router.post('/login', UserCtrl.login);
 
 //__Dashboard
-// router.get('/dashboard/users', verifyToken, DashboardController.getUsers)
+router.get('/dashboard/users', verifyToken, DashboardCtrl.getUsers)
 
 // --------------------------------------
 // Main

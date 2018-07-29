@@ -1,17 +1,25 @@
 // --------------------------------------------------
 //  Dashboard Controller
 // --------------------------------------------------
-const https = require("https");
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
 
-//Get Users
-exports.getUsers = (req, res) => {
+import ControllerInterface from "../config/interfaces/ControllerInterface";
+import User from "../models/User";
 
-    User.find({}, (err, users) => {
-        if (err) {
-            console.log(err);
-        }
-        res.status(200).json(users);
-    });
-};
+
+export default class DashboardController extends ControllerInterface {
+
+    constructor() {
+        super();
+    }
+
+
+    //Get Users
+    getUsers(req, res) {
+        User.find({}, (err, users) => {
+            if (err) {
+                console.log(err);
+            }
+            res.status(200).json(users);
+        });
+    }
+}

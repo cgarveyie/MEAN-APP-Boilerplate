@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
 var _https = require('https');
 
 var _https2 = _interopRequireDefault(_https);
@@ -64,27 +62,24 @@ var UserController = function (_ControllerInterface) {
                 password: hash
             });
 
-            _get(UserController.prototype.__proto__ || Object.getPrototypeOf(UserController.prototype), 'db', this).insert('user', user);
-
-            // user.save(function(err, user) {
-            //     if (err) {
-            //         return res.status(422).send(err);
-            //     }
-            //     let payload = {
-            //         subject: user._id
-            //     };
-            //     let token = jwt.sign(payload, '_secret');
-            //     res.status(200).send({
-            //         token
-            //     });
-            // });
+            user.save(function (err, user) {
+                if (err) {
+                    return res.status(422).send(err);
+                }
+                var payload = {
+                    subject: user._id
+                };
+                var token = _jsonwebtoken2.default.sign(payload, '_secret');
+                res.status(200).send({
+                    token: token
+                });
+            });
         }
     }, {
         key: 'login',
         value: function login(req, res) {
             var userData = req.body;
-            var user = new _User2.default();
-            user.getSchema().findOne({
+            _User2.default.findOne({
                 email: userData.email
             }, function (err, user) {
                 if (err) {
@@ -116,60 +111,5 @@ var UserController = function (_ControllerInterface) {
 
     return UserController;
 }(_ControllerInterface3.default);
-
-// //Register User
-// exports.register = (req, res) => {
-//     //Validate
-//     if (!req.body.password || !req.body.email) {
-//         return res.status(401).send('Email and password are required!');
-//     }
-//     //Encrypt password
-//     let salt = bcrypt.genSaltSync(saltRounds);
-//     let hash = bcrypt.hashSync(req.body.password, salt);
-
-//     let user = new User({
-//         email: req.body.email,
-//         password: hash,
-//     });
-
-
-//     user.save(function(err, user) {
-//         if (err) {
-//             return res.status(422).send(err);
-//         }
-//         let payload = { subject: user._id };
-//         let token = jwt.sign(payload, '_secret');
-//         res.status(200).send({ token });
-//     });
-// };
-
-// //Login User
-// exports.login = (req, res) => {
-//     let userData = req.body;
-//     User.findOne({
-//         email: userData.email
-//     }, (err, user) => {
-//         if (err) {
-//             return res.status(422).send(err);
-//         }
-//         if (!user) {
-//             res.status(401).send('Invalid email!');
-//         } else if (!userData.password) {
-//             res.status(401).send('Password required!');
-//         } else {
-//             //Hash attemoted password
-//             let isMatch = bcrypt.compareSync(userData.password, user.password);
-//             //Check if password matches
-//             if (!isMatch) {
-//                 res.status(401).send('Invalid password!');
-//             } else {
-//                 let payload = { subject: user._id };
-//                 let token = jwt.sign(payload, '_secret');
-//                 res.status(200).send({ token });
-//             }
-//         }
-//     });
-// };
-
 
 exports.default = UserController;
