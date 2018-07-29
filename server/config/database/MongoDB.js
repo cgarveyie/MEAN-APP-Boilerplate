@@ -5,9 +5,9 @@ const moogoose = require('mongoose');
 export default class MongoDB {
 
     constructor() {
-        this.host = 'alphadev-xeuzq.mongodb.net/test?retryWrites=true'
-        this.user = 'DaMezhi'
-        this.password = 'kamagistdani16'
+        this.host = ''
+        this.user = ''
+        this.password = ''
 
         //Connect to db
         let url = `mongodb+srv://${this.user}:${this.password}@${this.host}`;
