@@ -22,7 +22,7 @@ app.use('/api', api);
 
 //Start Server
 app.listen(PORT, function () {
-    console.log('We are live on ' + PORT);
+    console.log('We are live on ' + PORT + ', ' + 'Proccess: ' + process.pid);
 });
 
 module.exports = app;
